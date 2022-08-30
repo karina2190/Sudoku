@@ -10,8 +10,30 @@ const matrix = [
     [-1, -1, -1, -1, -1, -1, -1, -1, -1]
 ]
 
-window.onload = function() {
+var p = 0, r = 0, c = 0;
+
+function getNumber(cellId) {
+    p = cellId;
+    r = findRow(p);
+    c = findColumn(p);
+}
+
+function insertNumber(num) {
+    if (verifyColumn(num, c) == true && verifyRow(num, r) == true && verifySquare(num, r, c) == true) {
+        document.getElementById(p).innerHTML = num;
+        matrix[r][c] = num;
+    }
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+    p = 0;
+    r = 0;
+    c = 0;
+};
+
+
+document.getElementById("btn").onclick = function() {
     createSudoku();
+    btn.style.display = 'none';
 };
 
 function verifyColumn(num, col) {
@@ -180,3 +202,4 @@ function createSudoku() {
         }
     }
 }
+
