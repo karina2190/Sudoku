@@ -9,94 +9,88 @@
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <style>
       * { box-sizing: border-box; }
-table { margin: 10px; }
-tr:first-child td {
-	border-top-color: black;
-}
-tr:nth-child(3n) td {
-	border-bottom-color: black;
-}
-td {
-	border: 1px solid lightgrey;
-	height: 40px;
-	width: 40px;
-}
-td:first-child {
-	border-left-color: black;
-}
-td:nth-child(3n) {
-	border-right-color: black;
-}
-input {
-	padding: 0;
-	text-align: center;
-	border: 0;
-	height: 40px;
-	width: 40px;
-	text-align: center;
-  background-color: rgb(200, 198, 52);
-}
+        table { margin: 10px; }
+        tr:first-child td {
+          border-top-color: black;
+        }
+        tr:nth-child(3n) td {
+          border-bottom-color: black;
+        }
+        td {
+          border: 1px solid lightgrey;
+          height: 40px;
+          width: 40px;
+        }
+        td:first-child {
+          border-left-color: black;
+        }
+        td:nth-child(3n) {
+          border-right-color: black;
+        }
+        input {
+          padding: 0;
+          text-align: center;
+          border: 0;
+          height: 40px;
+          width: 40px;
+          text-align: center;
+          background-color: rgb(200, 198, 52);
+        }
 
-input:hover {
-	background: rgb(167, 138, 50);
-}
+        input:hover {
+          background: rgb(167, 138, 50);
+        }
 
-.button {
-  border: none;
-  color: rgb(232, 223, 223);
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  background-color:rgb(169, 31, 31);
-}
+        .button {
+          border: none;
+          color: rgb(232, 223, 223);
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+          background-color:rgb(169, 31, 31);
+        }
 
-.button:hover {
-  background-color: #89452c;
-}
+        .button:hover {
+          background-color: #89452c;
+        }
 
-.border-button {
-  border: solid 5px #FC5185;
-  transition: border-width 0.6s linear;
-}
+        .border-button {
+          border: solid 5px #FC5185;
+          transition: border-width 0.6s linear;
+        }
 
-.border-button:hover { 
-  border-width: 10px; 
-}
+        .border-button:hover { 
+          border-width: 10px; 
+        }
 
-.button:active,
-.active {
-  top: 2px;
-  left: 1px;
-  box-shadow: none;
-}
+        .btn-group button {
+          background-color: #ae942b; 
+          border: 1px solid rgb(91, 43, 13); 
+          color: white;
+          padding: 10px 24px;
+          cursor: pointer; 
+          float: left; 
+        }
 
-.btn-group button {
-  background-color: #ae942b; 
-  border: 1px solid rgb(91, 43, 13); 
-  color: white;
-  padding: 10px 24px;
-  cursor: pointer; 
-  float: left; 
-}
+        .btn-group:after {
+          content: "";
+          clear: both;
+          display: table;
+        }
 
-.btn-group:after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.btn-group button:hover {
-  background-color: #9f4722;
-}
+        .btn-group button:hover {
+          background-color: #9f4722;
+        }
     </style>
   </head>
   <body style="background-color: rgb(200, 198, 52)">
     <h2 align="center">Sudoku</h2>
     <button id="btn" class="button">Play</button>
+    <div style="font-size: 25px; color: #7c868f" id="paragraph"></div>
     <font size="2.5" face="Courier New" ALIGN=CENTER>
     <table id="sudoku">
       <tbody>
@@ -213,7 +207,6 @@ input:hover {
     <button onclick="insertNumber(8)">8</button>
     <button onclick="insertNumber(9)">9</button>
   </div>
-  <span class="popuptext" id="myPopup">A Simple Popup!</span>
 	<script src="index.js"></script>
   </body>
 </html>

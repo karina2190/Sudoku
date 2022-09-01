@@ -13,21 +13,24 @@ const matrix = [
 var p = 0, r = 0, c = 0;
 
 function getNumber(cellId) {
+    document.getElementById("paragraph").innerHTML = "";
     p = cellId;
     r = findRow(p);
     c = findColumn(p);
+    document.getElementById(p).style.background='#9f4722';
 }
 
 function insertNumber(num) {
     if (verifyColumn(num, c) == true && verifyRow(num, r) == true && verifySquare(num, r, c) == true) {
         document.getElementById(p).innerHTML = num;
         matrix[r][c] = num;
+        checkWinner();
+        p = 0;
+        r = 0;
+        c = 0;
+    } else {
+        document.getElementById("paragraph").innerHTML = "Wrong move :(";
     }
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
-    p = 0;
-    r = 0;
-    c = 0;
 };
 
 
@@ -185,6 +188,18 @@ function findColumn(num) {
     if (num == 9) {
         return 8;
     }
+}
+
+function checkWinner() {
+    for (var i = 0; i < 9; ++i) {
+        for (var j = 0; j < 9; ++j) {
+            if (matrix[i][j] == -1) {
+                return 0;
+            }
+        }
+    }
+    document.getElementById("paragraph").innerHTML = "Congratulations!";
+    return 1;
 }
 
 function createSudoku() {
