@@ -10,34 +10,92 @@ const matrix = [
     [-1, -1, -1, -1, -1, -1, -1, -1, -1]
 ]
 
-var p = 0, r = 0, c = 0;
-
-function getNumber(cellId) {
-    document.getElementById("paragraph").innerHTML = "";
-    p = cellId;
-    r = findRow(p);
-    c = findColumn(p);
-    document.getElementById(p).style.background='#9f4722';
+function findColumn(num) {
+    while (num > 9) {
+        num -= 9;
+    }
+    if (num == 1) {
+        return 0;
+    }
+    if (num == 2) {
+        return 1;
+    }
+    if (num == 3) {
+        return 2;
+    }
+    if (num == 4) {
+        return 3;
+    }
+    if (num == 5) {
+        return 4;
+    }
+    if (num == 6) {
+        return 5;
+    }
+    if (num == 7) {
+        return 6;
+    }
+    if (num == 8) {
+        return 7;
+    }
+    if (num == 9) {
+        return 8;
+    }
 }
 
-function insertNumber(num) {
-    if (verifyColumn(num, c) == true && verifyRow(num, r) == true && verifySquare(num, r, c) == true) {
-        document.getElementById(p).innerHTML = num;
-        matrix[r][c] = num;
-        checkWinner();
-        p = 0;
-        r = 0;
-        c = 0;
-    } else {
-        document.getElementById("paragraph").innerHTML = "Wrong move :(";
+function findRow(num) {
+    if (num >= 1 && num <= 9) {
+        return 0;
     }
-};
+    if (num >= 10 && num <= 18) {
+        return 1;
+    }
+    if (num >= 19 && num <= 27) {
+        return 2;
+    }
+    if (num >= 28 && num <= 36) {
+        return 3;
+    }
+    if (num >= 37 && num <= 45) {
+        return 4;
+    }
+    if (num >= 46 && num <= 54) {
+        return 5;
+    }
+    if (num >= 55 && num <= 63) {
+        return 6;
+    }
+    if (num >= 64 && num <= 72) {
+        return 7;
+    }
+    if (num >= 73 && num <= 81) {
+        return 8;
+    }
+}
 
+function checkWinner() {
+    for (var i = 0; i < 9; ++i) {
+        for (var j = 0; j < 9; ++j) {
+            if (matrix[i][j] == -1) {
+                return 0;
+            }
+        }
+    }
+    document.getElementById("paragraph").innerHTML = "Congratulations!";
+    return 1;
+}
 
-document.getElementById("btn").onclick = function() {
-    createSudoku();
-    btn.style.display = 'none';
-};
+var p = 0, r = 0, c = 0, p2 = 0;
+
+function getNumber(cellId) {
+    p2 = p;
+    p = cellId;
+    document.getElementById(p).style.background='#9f4722';
+    r = findRow(p);
+    c = findColumn(p);
+    document.getElementById("paragraph").innerHTML = "";
+    document.getElementById(p2).style.background='rgb(200, 198, 52)';
+}
 
 function verifyColumn(num, col) {
     var equalNumbers = 1;
@@ -127,79 +185,19 @@ function verifySquare(num, row, col) {
     return true; //nu se gaseste numarul, deci poate fi folosit
 }
 
-function findRow(num) {
-    if (num >= 1 && num <= 9) {
-        return 0;
+function insertNumber(num) {
+    if (verifyColumn(num, c) == true && verifyRow(num, r) == true && verifySquare(num, r, c) == true) {
+        document.getElementById(p).innerHTML = num;
+        matrix[r][c] = num;
+        document.getElementById(p).style.background='rgb(200, 198, 52)';
+        document.getElementById("paragraph").innerHTML = "";
+        checkWinner();
+        p = 0;
+        r = 0;
+        c = 0;
+    } else {
+        document.getElementById("paragraph").innerHTML = "Wrong move :(";
     }
-    if (num >= 10 && num <= 18) {
-        return 1;
-    }
-    if (num >= 19 && num <= 27) {
-        return 2;
-    }
-    if (num >= 28 && num <= 36) {
-        return 3;
-    }
-    if (num >= 37 && num <= 45) {
-        return 4;
-    }
-    if (num >= 46 && num <= 54) {
-        return 5;
-    }
-    if (num >= 55 && num <= 63) {
-        return 6;
-    }
-    if (num >= 64 && num <= 72) {
-        return 7;
-    }
-    if (num >= 73 && num <= 81) {
-        return 8;
-    }
-}
-
-function findColumn(num) {
-    while (num > 9) {
-        num -= 9;
-    }
-    if (num == 1) {
-        return 0;
-    }
-    if (num == 2) {
-        return 1;
-    }
-    if (num == 3) {
-        return 2;
-    }
-    if (num == 4) {
-        return 3;
-    }
-    if (num == 5) {
-        return 4;
-    }
-    if (num == 6) {
-        return 5;
-    }
-    if (num == 7) {
-        return 6;
-    }
-    if (num == 8) {
-        return 7;
-    }
-    if (num == 9) {
-        return 8;
-    }
-}
-
-function checkWinner() {
-    for (var i = 0; i < 9; ++i) {
-        for (var j = 0; j < 9; ++j) {
-            if (matrix[i][j] == -1) {
-                return 0;
-            }
-        }
-    }
-    document.getElementById("paragraph").innerHTML = "Congratulations!";
-    return 1;
 }
 
 function createSudoku() {
@@ -216,5 +214,10 @@ function createSudoku() {
             }
         }
     }
+}
+
+document.getElementById("btn").onclick = function() {
+    createSudoku();
+    btn.style.display = 'none';
 }
 
