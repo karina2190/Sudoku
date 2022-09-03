@@ -74,8 +74,8 @@ function findRow(num) {
 }
 
 function checkWinner() {
-    for (var i = 0; i < 9; ++i) {
-        for (var j = 0; j < 9; ++j) {
+    for (let i = 0; i < 9; ++i) {
+        for (let j = 0; j < 9; ++j) {
             if (matrix[i][j] == -1) {
                 return 0;
             }
@@ -98,33 +98,33 @@ function getNumber(cellId) {
 }
 
 function verifyColumn(num, col) {
-    var equalNumbers = 1;
+    var equalNumbers = 0;
     for (var i = 0; i < 9; ++i) {
         if (matrix[i][col] == num) {
             ++equalNumbers;
         }
     }
-    if (equalNumbers > 1) {
+    if (equalNumbers > 0) {
         return false; //s a gasit, deci nu poate fi folosit
     }
     return true; //nu s a gasit, deci poate fi folosit
 }
 
 function verifyRow(num, row) {
-    var equalNumbers = 1;
-    for (var i = 0; i < 9; ++i) {
+    var equalNumbers = 0;
+    for (let i = 0; i < 9; ++i) {
         if (matrix[row][i] == num) {
             ++equalNumbers;
         }
     }
-    if (equalNumbers > 1) {
+    if (equalNumbers > 0) {
         return false; //s a gasit, deci nu poate fi folosit
     }
     return true; //nu s a gasit, deci poate fi folosit
 }
 
 function verifySquare(num, row, col) {
-    var starting_line, starting_column, end_line, end_column;
+    let starting_line, starting_column, end_line, end_column;
     if (row <= 2 && col <= 2) {
         starting_line = 0;
         starting_column = 0;
@@ -171,15 +171,15 @@ function verifySquare(num, row, col) {
         end_line = 8;
         end_column = 8;
     }
-    var equal_numbers = 1;
-    for (var i = starting_line; i <= end_line; ++i) {
-        for (var j = starting_column; j <= end_column; ++j) {
+    var equal_numbers = 0;
+    for (let i = starting_line; i <= end_line; ++i) {
+        for (let j = starting_column; j <= end_column; ++j) {
             if (matrix[i][j] == num) {
                 ++equal_numbers;
             }
         }
     }
-    if (equal_numbers > 1) {
+    if (equal_numbers > 0) {
         return false; //se gaseste numarul in patratul resp, deci nu poate fi folosit
     }
     return true; //nu se gaseste numarul, deci poate fi folosit
@@ -201,7 +201,7 @@ function insertNumber(num) {
 }
 
 function createSudoku() {
-    for (var i = 1; i <= 40; ++i) {
+    for (let i = 1; i <= 40; ++i) {
         var x = 0, y = 0;
         var myId =  Math.floor(Math.random() * 81 + 1);
         x = findRow(myId);
