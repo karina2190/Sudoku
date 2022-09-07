@@ -85,7 +85,7 @@ function checkWinner() {
     return 1;
 }
 
-var p = 0, r = 0, c = 0, p2 = 0;
+let p = 0, r = 0, c = 0, p2 = 0;
 
 function getNumber(cellId) {
     p2 = p;
@@ -98,7 +98,7 @@ function getNumber(cellId) {
 }
 
 function verifyColumn(num, col) {
-    var equalNumbers = 0;
+    let equalNumbers = 0;
     for (var i = 0; i < 9; ++i) {
         if (matrix[i][col] == num) {
             ++equalNumbers;
@@ -111,7 +111,7 @@ function verifyColumn(num, col) {
 }
 
 function verifyRow(num, row) {
-    var equalNumbers = 0;
+    let equalNumbers = 0;
     for (let i = 0; i < 9; ++i) {
         if (matrix[row][i] == num) {
             ++equalNumbers;
@@ -171,7 +171,7 @@ function verifySquare(num, row, col) {
         end_line = 8;
         end_column = 8;
     }
-    var equal_numbers = 0;
+    let equal_numbers = 0;
     for (let i = starting_line; i <= end_line; ++i) {
         for (let j = starting_column; j <= end_column; ++j) {
             if (matrix[i][j] == num) {
@@ -196,18 +196,20 @@ function insertNumber(num) {
         r = 0;
         c = 0;
     } else {
-        document.getElementById("paragraph").innerHTML = "Wrong move :(";
+        if (p != 0) {
+            document.getElementById("paragraph").innerHTML = "Wrong move :(";
+        }
     }
 }
 
-function createSudoku() {
+function generateSudoku() {
     for (let i = 1; i <= 40; ++i) {
-        var x = 0, y = 0;
-        var myId =  Math.floor(Math.random() * 81 + 1);
+        let x = 0, y = 0;
+        let myId =  Math.floor(Math.random() * 81 + 1);
         x = findRow(myId);
         y = findColumn(myId);
         while (matrix[x][y] == -1) {
-            var myNum = Math.floor(Math.random() * 9 + 1);
+            let myNum = Math.floor(Math.random() * 9 + 1);
             if (verifySquare(myNum, x, y) == true && verifyRow(myNum, x) == true && verifyColumn(myNum, y) == true) {
                 document.getElementById(myId).innerHTML = myNum;
                 matrix[x][y] = myNum;
@@ -217,7 +219,33 @@ function createSudoku() {
 }
 
 document.getElementById("btn").onclick = function() {
-    createSudoku();
+    generateTable();
     btn.style.display = 'none';
 }
 
+let idNum = 1;
+
+function generateTable() {
+    const tbl = document.createElement("table");
+    const tblBody = document.createElement("tbody");
+    for (let i = 1; i <= 9; ++i) {
+      const row = document.createElement("tr");
+      for (let j = 1; j <= 9; ++j) {
+        const cell = document.createElement("td");
+        cell.id = idNum;
+        let input = document.createElement('input');
+        input.setAttribute('type', 'button');
+        input.onclick = function(){getNumber(cell.id)};
+        cell.appendChild(input);
+        ++idNum;
+        const cellText = document.createTextNode("");
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+      }
+      tblBody.appendChild(row);
+    }
+    tbl.appendChild(tblBody);
+    document.body.appendChild(tbl);
+    tbl.setAttribute("border", "2");
+    generateSudoku();
+}
