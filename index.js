@@ -14,62 +14,23 @@ function findColumn(num) {
     while (num > 9) {
         num -= 9;
     }
-    if (num == 1) {
-        return 0;
-    }
-    if (num == 2) {
-        return 1;
-    }
-    if (num == 3) {
-        return 2;
-    }
-    if (num == 4) {
-        return 3;
-    }
-    if (num == 5) {
-        return 4;
-    }
-    if (num == 6) {
-        return 5;
-    }
-    if (num == 7) {
-        return 6;
-    }
-    if (num == 8) {
-        return 7;
-    }
-    if (num == 9) {
-        return 8;
+    for (let i = 1; i <= 9; ++i) {
+        if (num == i) {
+            return i - 1;
+        }
     }
 }
 
 function findRow(num) {
-    if (num >= 1 && num <= 9) {
-        return 0;
-    }
-    if (num >= 10 && num <= 18) {
-        return 1;
-    }
-    if (num >= 19 && num <= 27) {
-        return 2;
-    }
-    if (num >= 28 && num <= 36) {
-        return 3;
-    }
-    if (num >= 37 && num <= 45) {
-        return 4;
-    }
-    if (num >= 46 && num <= 54) {
-        return 5;
-    }
-    if (num >= 55 && num <= 63) {
-        return 6;
-    }
-    if (num >= 64 && num <= 72) {
-        return 7;
-    }
-    if (num >= 73 && num <= 81) {
-        return 8;
+    let first = 1, last = 9, ok = 0, number = 0;
+    while (ok == 0) {
+        if (num >= first && num <= last) {
+            return number;
+        } else {
+            ++number;
+            first += 9;
+            last += 9;
+        }
     }
 }
 
@@ -85,16 +46,16 @@ function checkWinner() {
     return 1;
 }
 
-let p = 0, r = 0, c = 0, p2 = 0;
+let currentCell = 0, currentRow = 0, currentColumn = 0, previousCell = 0;
 
 function getNumber(cellId) {
-    p2 = p;
-    p = cellId;
-    document.getElementById(p).style.background='#9f4722';
-    r = findRow(p);
-    c = findColumn(p);
+    previousCell = currentCell;
+    currentCell = cellId;
+    document.getElementById(currentCell).style.background='#9f4722';
+    currentRow = findRow(currentCell);
+    currentColumn = findColumn(currentCell);
     document.getElementById("paragraph").innerHTML = "";
-    document.getElementById(p2).style.background='rgb(200, 198, 52)';
+    document.getElementById(previousCell).style.background='rgb(200, 198, 52)';
 }
 
 function verifyColumn(num, col) {
@@ -186,17 +147,17 @@ function verifySquare(num, row, col) {
 }
 
 function insertNumber(num) {
-    if (verifyColumn(num, c) == true && verifyRow(num, r) == true && verifySquare(num, r, c) == true) {
-        document.getElementById(p).innerHTML = num;
-        matrix[r][c] = num;
-        document.getElementById(p).style.background='rgb(200, 198, 52)';
+    if (verifyColumn(num, currentColumn) == true && verifyRow(num, currentRow) == true && verifySquare(num, currentRow, currentColumn) == true) {
+        document.getElementById(currentCell).innerHTML = num;
+        matrix[currentRow][currentColumn] = num;
+        document.getElementById(currentCell).style.background='rgb(200, 198, 52)';
         document.getElementById("paragraph").innerHTML = "";
         checkWinner();
-        p = 0;
-        r = 0;
-        c = 0;
+        currentCell = 0;
+        currentRow = 0;
+        currentColumn = 0;
     } else {
-        if (p != 0) {
+        if (currentCell != 0) {
             document.getElementById("paragraph").innerHTML = "Wrong move :(";
         }
     }
