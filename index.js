@@ -85,56 +85,16 @@ function verifyRow(num, row) {
 }
 
 function verifySquare(num, row, col) {
-    let starting_line, starting_column, end_line, end_column;
-    if (row <= 2 && col <= 2) {
-        starting_line = 0;
-        starting_column = 0;
-        end_line = 2;
-        end_column = 2;
-    } else if (row <= 2 && col >= 3 && col <= 5) {
-        starting_line = 0;
-        starting_column = 3;
-        end_line = 2;
-        end_column = 5;
-    } else if (row <= 2 && col > 5) {
-        starting_line = 0;
-        starting_column = 6;
-        end_line = 2;
-        end_column = 8;
-    } else if (row >= 3 && row <= 5 && col <= 2) {
-        starting_line = 3;
-        starting_column = 0;
-        end_line = 5;
-        end_column = 2;
-    } else if (row >= 3 && row <= 5 && col >= 3 && col <= 5) {
-        starting_line = 3;
-        starting_column = 3;
-        end_line = 5;
-        end_column = 5;
-    } else if (row >= 3 && row <= 5 && col > 5) {
-        starting_line = 3;
-        starting_column = 6;
-        end_line = 5;
-        end_column = 8;
-    } else if (row > 5 && col <= 2) {
-        starting_line = 6;
-        starting_column = 0;
-        end_line = 8;
-        end_column = 2;
-    } else if (row > 5 && col >= 3 && col <= 5) {
-        starting_line = 6;
-        starting_column = 3;
-        end_line = 8;
-        end_column = 5;
-    } else if (row > 5 && col > 5) {
-        starting_line = 6;
-        starting_column = 6;
-        end_line = 8;
-        end_column = 8;
+    let starting_line = row, starting_column = col;
+    while (starting_line % 3 != 0) {
+        --starting_line;
+    }
+    while (starting_column % 3 != 0) {
+        --starting_column;
     }
     let equal_numbers = 0;
-    for (let i = starting_line; i <= end_line; ++i) {
-        for (let j = starting_column; j <= end_column; ++j) {
+    for (let i = starting_line; i < starting_line + 3; ++i) {
+        for (let j = starting_column; j < starting_column + 3; ++j) {
             if (matrix[i][j] == num) {
                 ++equal_numbers;
             }
