@@ -22,14 +22,14 @@ function findColumn(num) {
 }
 
 function findRow(num) {
-    let first = 1, last = 9, ok = 0, number = 0;
+    let firstNumber = 1, lastNumber = 9, ok = 0, number = 0;
     while (ok == 0) {
-        if (num >= first && num <= last) {
+        if (num >= firstNumber && num <= lastNumber) {
             return number;
         } else {
             ++number;
-            first += 9;
-            last += 9;
+            firstNumber += 9;
+            lastNumber += 9;
         }
     }
 }
