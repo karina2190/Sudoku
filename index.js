@@ -84,17 +84,16 @@ function verifyRow(num, row) {
     return true; //nu s a gasit, deci poate fi folosit
 }
 
-function verifySquare(num, row, col) {
-    let starting_line = row, starting_column = col;
-    while (starting_line % 3 != 0) {
-        --starting_line;
+function verifySquare(num, startingRow, startingColumn) {
+    while (startingRow % 3 != 0) {
+        --startingRow;
     }
-    while (starting_column % 3 != 0) {
-        --starting_column;
+    while (startingColumn % 3 != 0) {
+        --startingColumn;
     }
     let equal_numbers = 0;
-    for (let i = starting_line; i < starting_line + 3; ++i) {
-        for (let j = starting_column; j < starting_column + 3; ++j) {
+    for (let i = startingRow; i < startingRow + 3; ++i) {
+        for (let j = startingColumn; j < startingColumn + 3; ++j) {
             if (matrix[i][j] == num) {
                 ++equal_numbers;
             }
